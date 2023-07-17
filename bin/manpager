@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+has_cmd() {
+	for opt in "$@"; do
+		command -v "$opt" >/dev/null
+	done
+}
+
+if ! has_cmd ansifilter && has_cmd col; then
+	ansifilter() {
+		col -bx
+	}
+fi
+
+if [ -t 0 ]; then
+	# mandoc
+	if has_cmd ansifilter bat; then
+		ansifilter <"${!#}" | eval "bat --color=always -plman ${*:1:$#-1}"
+	else
+		cat "${!#}"
+	fi
+else
+	# man-db
+	if has_cmd ansifilter bat; then
+		ansifilter | eval "bat --color=always -plman ${*//\\/\\\\}"
+	else
+		cat
+	fi
+fi
