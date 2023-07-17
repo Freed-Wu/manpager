@@ -8,8 +8,7 @@
         {
           formatter = nixpkgs-fmt;
           packages.default = stdenv.mkDerivation rec {
-            pname = "manpager";
-            version = "";
+            name = "manpager";
             src = self;
             nativeBuildInputs = [ cmake ];
           };
