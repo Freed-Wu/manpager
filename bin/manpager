@@ -12,6 +12,32 @@ if ! has_cmd ansifilter && has_cmd col; then
 fi
 
 if [ -t 0 ]; then
+	if [[ $# == 0 ]]; then
+		judge_shell() {
+			local shell
+			for shell in "$@"; do
+				[[ $SHELL == */$shell ]] && return
+			done
+			return 1
+		}
+		self="$PWD/$0"
+		self="'${self//\'/\'\\\'\'}'"
+		if judge_shell bash zsh ksh; then
+			echo "MANPAGER=$self"
+			echo 'export MANPAGER'
+		elif judge_shell tclsh wish; then
+			echo "set env(MANPAGER) $self"
+			echo 'env -export MANPAGER'
+		elif judge_shell csh tcsh; then
+			echo "setenv env MANPAGER $self"
+		elif judge_shell pwsh; then
+			echo "\$env:MANPAGER = $self"
+			echo 'Export-Variable -Name MANPAGER'
+		elif judge_shell cmd; then
+			echo "setx MANPAGER $self"
+		fi
+		exit
+	fi
 	# mandoc
 	if has_cmd ansifilter bat; then
 		ansifilter <"${!#}" | eval "bat --color=always -plman ${*:1:$#-1}"

@@ -79,8 +79,10 @@ brew install manpager
 
 ## Configure
 
+Add the following code to your `.bash_profile`, `.zprofile`, ...
+
 ```sh
-export MANPAGER=manpager
+eval "$(manpager)"
 ```
 
 ## Customize
