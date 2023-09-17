@@ -20,21 +20,23 @@ if [ -t 0 ]; then
 			done
 			return 1
 		}
-		self="$PWD/$0"
+		if ! has_cmd bat; then
+			bat() {
+				command cat "$*"
+			}
+		fi
+		self="$0"
 		self="'${self//\'/\'\\\'\'}'"
 		if judge_shell bash zsh ksh; then
-			echo "MANPAGER=$self"
-			echo 'export MANPAGER'
+			echo -e "MANPAGER=$self\nexport MANPAGER" | bat --color=auto -plsh
 		elif judge_shell tclsh wish; then
-			echo "set env(MANPAGER) $self"
-			echo 'env -export MANPAGER'
+			echo -e "set env(MANPAGER) $self\nenv -export MANPAGER" | bat --color=auto -plsh
 		elif judge_shell csh tcsh; then
-			echo "setenv env MANPAGER $self"
+			echo -e "setenv env MANPAGER $self" | bat --color=auto -plsh
 		elif judge_shell pwsh; then
-			echo "\$env:MANPAGER = $self"
-			echo 'Export-Variable -Name MANPAGER'
+			echo -e "\$env:MANPAGER = $self\nExport-Variable -Name MANPAGER" | bat --color=auto -plsh
 		elif judge_shell cmd; then
-			echo "setx MANPAGER $self"
+			echo -e "setx MANPAGER $self" | bat --color=auto -plsh
 		fi
 		exit
 	fi

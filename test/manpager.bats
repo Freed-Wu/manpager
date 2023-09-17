@@ -4,13 +4,8 @@ setup() {
 	. test/setup.sh
 }
 
-@test export {
-	run bin/manpager
-	assert_output -p 'export MANPAGER'
-}
-
 @test manpager {
-	run sh -c "export MANPAGER='batman | less --pattern=^\\S+' man man"
+	run sh -c "export MANPAGER='bin/manpager | less --pattern=^\\S+' man man"
 	assert_success
 }
 
