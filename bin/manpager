@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 has_cmd() {
-	for opt in "$@"; do
+	local opt
+	for opt; do
 		command -v "$opt" >/dev/null
+		(($? == 0)) || return $?
 	done
 }
 
