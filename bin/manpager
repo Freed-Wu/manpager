@@ -4,8 +4,9 @@ has_cmd() {
 	for opt; do
 		if command -v "$opt" >/dev/null; then
 			continue
+		else
+			return $?
 		fi
-		return $?
 	done
 }
 
