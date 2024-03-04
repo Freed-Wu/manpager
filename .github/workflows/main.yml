@@ -24,7 +24,7 @@ jobs:
           - bat mandoc && sudo ln -sf mman /usr/bin/man
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: mig4/setup-bats@v1
       - uses: brokenpip3/setup-bats-libs@0.1.0
       - uses: ruby/setup-ruby@v1
@@ -52,7 +52,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Install dependencies
         run: |
           sudo apt-get -y update
