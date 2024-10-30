@@ -166,3 +166,8 @@ differences between them:
     `manpager --option /tmp/man.XXXX??????`
 
 So we use `[ -t 0 ]` to judge current `man` is which `man`, then wrap it.
+
+## Related Projects
+
+- [gentoo manpager](https://gitweb.gentoo.org/repo/gentoo.git/tree/app-text/manpager/files/manpager.c):
+  add `-manpager` for `sys-apps/man-db` to avoid installing it
