@@ -1,0 +1,18 @@
+Source: manpager
+Section: utils
+Priority: optional
+Maintainer: Wu, Zhenyu <wuzhenyu@ustc.edu>
+Uploaders: Wu, Zhenyu <wuzhenyu@ustc.edu>
+Build-Depends: debhelper-compat (= 9)
+Rules-Requires-Root: no
+Standards-Version: 4.6.0
+Homepage: https://github.com/Freed-Wu/manpager
+Vcs-Git: https://github.com/Freed-Wu/manpager
+Vcs-Browser: https://github.com/Freed-Wu/manpager
+
+Package: manpager
+Architecture: all
+Multi-Arch: foreign
+Depends: ansifilter, bat, ${misc:Depends}
+Description: Colorize `man XXX`
+Recommends: man

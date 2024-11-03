@@ -70,6 +70,14 @@ yay -S sh-manpager
 nix-env -iA nur.repos.Freed-Wu.manpager
 ```
 
+### [PPA](https://launchpad.net/~freedwu/+archive/ubuntu/ppa)
+
+```sh
+sudo add-apt-repository ppa:freedwu/ppa
+sudo apt update
+sudo apt install manpager
+```
+
 ### homebrew
 
 ```sh
