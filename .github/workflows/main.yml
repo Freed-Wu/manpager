@@ -107,14 +107,13 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/')
     steps:
       - uses: actions/checkout@v4
+        with:
+          path: manpager-${{github.ref_name}}
       - name: Build
         run: |
-          n="manpager-$GITHUB_REF_NAME"
-          cd ..
-          mv manpager "$n"
-          tar vcaf ./"$n".tar.gz "$n"
-          mv ./*.tar.* "$n"
-          mv "$n" manpager
+          tar vcafC ../manpager-${{github.ref_name}}.tar.gz \
+          manpager-${{github.ref_name}} ..
+          mv ../manpager-${{github.ref_name}}.tar.gz .
       - uses: yuezk/publish-ppa-package@main
         with:
           repository: freedwu/ppa
