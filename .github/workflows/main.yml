@@ -24,7 +24,7 @@ jobs:
           - bat mandoc && sudo ln -sf mman /usr/bin/man
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: mig4/setup-bats@v1
       - uses: brokenpip3/setup-bats-libs@0.1.0
       - uses: ruby/setup-ruby@v1
@@ -44,7 +44,7 @@ jobs:
         env:
           # due to setup-bats
           TMPDIR: /tmp
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v4
         with:
           files: coverage/codecov-result.json
 
@@ -52,7 +52,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Install dependencies
         run: |
           sudo apt-get -y update
@@ -64,13 +64,13 @@ jobs:
           cd build
           cpack -G DEB
           cpack -G RPM
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: "! startsWith(github.ref, 'refs/tags/')"
         with:
           path: |
             build/*.deb
             build/*.rpm
-      - uses: softprops/action-gh-release@v1
+      - uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
           # body_path: build/CHANGELOG.md
@@ -113,12 +113,11 @@ jobs:
         run: |
           tar vcafC ../manpager-${{github.ref_name}}.tar.gz \
           manpager-${{github.ref_name}} ..
-          mv ../manpager-${{github.ref_name}}.tar.gz .
       - uses: yuezk/publish-ppa-package@main
         with:
           repository: freedwu/ppa
           gpg_private_key: ${{secrets.GPG_PRIVATE_KEY}}
           gpg_passphrase: ${{secrets.GPG_PASSPHRASE}}
-          tarball: ./*.tar.*
+          tarball: ../*.tar.*
           deb_email: ${{secrets.DEB_EMAIL}}
           deb_fullname: freedwu
