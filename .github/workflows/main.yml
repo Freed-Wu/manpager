@@ -111,13 +111,13 @@ jobs:
           path: manpager-${{github.ref_name}}
       - name: Build
         run: |
-          tar vcafC ../manpager-${{github.ref_name}}.tar.gz \
-          manpager-${{github.ref_name}} ..
+          tar vcaf manpager-${{github.ref_name}}.tar.gz \
+            manpager-${{github.ref_name}}
       - uses: yuezk/publish-ppa-package@main
         with:
           repository: freedwu/ppa
           gpg_private_key: ${{secrets.GPG_PRIVATE_KEY}}
           gpg_passphrase: ${{secrets.GPG_PASSPHRASE}}
-          tarball: ../*.tar.*
+          tarball: ./*.tar.*
           deb_email: ${{secrets.DEB_EMAIL}}
           deb_fullname: freedwu
