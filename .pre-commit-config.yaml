@@ -71,17 +71,17 @@ repos:
           - mdformat-config
           - mdformat-web
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: v0.15.0
+    rev: v0.16.0
     hooks:
       - id: markdownlint-cli2
         additional_dependencies:
           - markdown-it-texmath
   - repo: https://github.com/scop/pre-commit-shfmt
-    rev: v3.10.0-1
+    rev: v3.10.0-2
     hooks:
       - id: shfmt
   - repo: https://github.com/Decodetalkers/neocmakelsp
-    rev: v0.8.12.2
+    rev: v0.8.13
     hooks:
       - id: neocmakelsp-format
   - repo: https://github.com/cmake-lint/cmake-lint
@@ -89,7 +89,7 @@ repos:
     hooks:
       - id: cmakelint
   - repo: https://github.com/rubocop/rubocop
-    rev: v1.68.0
+    rev: v1.69.2
     hooks:
       - id: rubocop
   - repo: https://github.com/nix-community/nixpkgs-fmt
